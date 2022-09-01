@@ -5,7 +5,7 @@ export const __getComment = createAsyncThunk(
   "GET_COMMENT",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get("http://localhost:3001/comments");
+      const data = await axios.get("https://morning-woodland-46840.herokuapp.com/comments");
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -18,7 +18,7 @@ export const __addComment = createAsyncThunk(
   "ADD_COMMENT",
   async (arg, thunkAPI) => {
     try {
-      const { data } = await axios.post("http://localhost:3001/comments", arg);
+      const { data } = await axios.post("https://morning-woodland-46840.herokuapp.com/comments", arg);
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -42,13 +42,13 @@ export const commentListSlice = createSlice({
     removeComment(state, action){
       const index = state.comments.findIndex(comments =>  comments.id === action.payload);
       state.comments.splice(index,1);
-      axios.delete(`http://localhost:3001/comments/${action.payload}`);
+      axios.delete(`https://morning-woodland-46840.herokuapp.com/comments/${action.payload}`);
     },
     
     updataComment: (state, action) => {
       const index = state.comments.findIndex(comments =>  comments.id === action.payload.id);
       state.comments.splice(index,1,action.payload);              // 
-      axios.patch(`http://localhost:3001/comments/${action.payload.id}`, action.payload)
+      axios.patch(`https://morning-woodland-46840.herokuapp.com/comments/${action.payload.id}`, action.payload)
     }
 
   },

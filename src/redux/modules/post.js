@@ -5,7 +5,7 @@ export const __getPosts = createAsyncThunk(
   "GET_POSTS",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(`http://localhost:3001/cards`);
+      const data = await axios.get(`https://morning-woodland-46840.herokuapp.com/cards`);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -20,7 +20,7 @@ export const __deletePosts = createAsyncThunk(
   // 처리할 비동기 함수
   async (payload) => {
     // 서버에서 데이터를 삭제
-    const res = await axios.delete(`http://localhost:3001/cards/${payload}`);
+    const res = await axios.delete(`https://morning-woodland-46840.herokuapp.com/cards/${payload}`);
     // action의 payload 리턴
     return res.data;
   }
@@ -41,12 +41,12 @@ export const postSlice = createSlice({
   reducers: {
     addCard: (state, action) => {
       state.cards.push(action.payload);
-      axios.post("http://localhost:3001/cards", action.payload);
+      axios.post("https://morning-woodland-46840.herokuapp.com/cards", action.payload);
     },
 
     updataCard: (state, action) => {
 
-      axios.patch(`http://localhost:3001/cards/${action.payload.id}`, action.payload)
+      axios.patch(`https://morning-woodland-46840.herokuapp.com/cards/${action.payload.id}`, action.payload)
     }
 
   },
